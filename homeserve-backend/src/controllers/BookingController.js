@@ -237,35 +237,7 @@ class BookingController {
   };
 
   
-  // _applyTransition = (booking, nextStatus) => {
-  //   const allowed = ALLOWED_TRANSITIONS[booking.status] || [];
-  //   if (!allowed.includes(nextStatus)) {
-  //     throw new ApiError(400, `Invalid status transition from ${booking.status} to ${nextStatus}`);
-  //   }
-
-    
-  //   if (JOB_PROGRESS_STATUSES.includes(nextStatus)) {
-  //     const today = new Date();
-  //     today.setHours(0, 0, 0, 0);
-  //     const scheduledDate = new Date(booking.bookingDate);
-  //     scheduledDate.setHours(0, 0, 0, 0);
-
-  //     if (today < scheduledDate) {
-  //       throw new ApiError(
-  //         400,
-  //         `This job is scheduled for ${scheduledDate.toLocaleDateString('en-GB', {
-  //           day: 'numeric',
-  //           month: 'short',
-  //           year: 'numeric',
-  //         })}. You can't update its status before that date.`
-  //       );
-  //     }
-  //   }
-
-  //   booking.status = nextStatus;
-  //   booking.statusHistory.push({ status: nextStatus, changedAt: new Date() });
-  // };
- 
+  
 
   _applyTransition = (booking, nextStatus) => {
     const allowed = ALLOWED_TRANSITIONS[booking.status] || [];

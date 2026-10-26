@@ -36,6 +36,10 @@ class ServiceController {
   });
 
  
+  
+  
+
+
   getAll = asyncHandler(async (req, res) => {
     const { page, limit, skip } = getPaginationParams(req.query);
     const { search, category, minPrice, maxPrice, sort, status } = req.query;
@@ -43,7 +47,12 @@ class ServiceController {
     const filter = {};
     filter.status = status || 'active';
     if (category) filter.categoryId = category;
-    if (search) filter.$text = { $search: search };
+    
+   
+    if (search) {
+      filter.name = { $regex: search, $options: 'i' }; 
+    }
+
     if (minPrice || maxPrice) {
       filter.basePrice = {};
       if (minPrice) filter.basePrice.$gte = Number(minPrice);
@@ -61,7 +70,6 @@ class ServiceController {
 
     return sendSuccess(res, 200, 'Services fetched', services, buildPaginationMeta(total, page, limit));
   });
-
   
   getById = asyncHandler(async (req, res) => {
     const service = await Service.findById(req.params.id).populate('categoryId', 'name');

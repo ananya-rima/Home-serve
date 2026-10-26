@@ -253,7 +253,7 @@ const providerSlice = createSlice({
       .addCase(fetchEarnings.fulfilled, (state, action) => {
         state.earnings = action.payload;
       })
-      // Provider actions on bookings (thunks live in bookingSlice) keep these lists in sync
+      
       .addCase(acceptBooking.fulfilled, (state, action) => syncBooking(state, action.payload))
       .addCase(rejectBooking.fulfilled, (state, action) => syncBooking(state, action.payload))
       .addCase(updateBookingStatus.fulfilled, (state, action) => syncBooking(state, action.payload))
